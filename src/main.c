@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 #include "main.h"
+
+// author : Narendra Sammengi
 extern int calculate(int , long *, char *);
 extern int parser(char *);
 char paras[100];
