@@ -1,0 +1,48 @@
+ARM64_CC_PATH=/home/naren/Desktop/LINUX/Cross_Compilation/IMX8_Manual_build/downloads/toolchain/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu/bin
+ARM32_CC_PATH=/home/naren/Desktop/LINUX/Cross_Compilation/bbb_manual_build/toolchain/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-linux-gnueabihf/bin
+CFLAGS=-Wall -Wextra -g -MMD -MP
+
+ARCH?=native
+
+BUILD_DIR=build/$(ARCH)
+
+ifeq ($(ARCH),native)
+	CC=gcc
+endif
+ifeq ($(ARCH),ARM64)
+	CC=$(ARM64_CC_PATH)/aarch64-none-linux-gnu-gcc
+endif
+ifeq ($(ARCH),ARM32)
+	CC=$(ARM32_CC_PATH)/arm-none-linux-gnueabihf-gcc
+endif
+
+
+.PHONY=all clean
+
+TARGET=$(BUILD_DIR)/myapp
+all:$(TARGET)
+
+SRC=add.c calculator.c clean.c main.c parser.c sub.c
+OBJS=$(SRC:%.c=$(BUILD_DIR)/%.o)
+DEPS=$(SRC:.c=$(BUILD_DIR)/.d)
+
+$(TARGET):$(OBJS)
+	$(CC) $^ -o $@
+
+$(BUILD_DIR)/%.o:%.c 
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+-include $(DEPS)
+
+clean:
+	rm -rf build
+
+
+
+
+
+	
+
+	
+
