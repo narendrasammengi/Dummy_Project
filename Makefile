@@ -7,7 +7,7 @@ AR ?= ar
 
 # Yocto will provide these
 CFLAGS ?= -Wall -Wextra -MMD -MP
-CPPFLAGS ?= -Iinclude
+CPPFLAGS ?=
 LDFLAGS ?=
 
 
@@ -39,8 +39,8 @@ LIB_DIR = library
 # Debug / Release flags
 # --------------------------------------------------
 
-DEBUG_CFLAGS = $(CPPFLAGS) $(CFLAGS) -g
-RELEASE_CFLAGS = $(CPPFLAGS) $(CFLAGS)
+DEBUG_CFLAGS = $(CPPFLAGS) $(CFLAGS) -Iinclude -g
+RELEASE_CFLAGS = $(CPPFLAGS) $(CFLAGS) -Iinclude
 
 
 # --------------------------------------------------
